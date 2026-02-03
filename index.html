@@ -7,103 +7,96 @@
 <title>Important Metrics</title>
 
 <style>
-/* ===== Reset ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  *{ margin:0; padding:0; box-sizing:border-box; }
 
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background:#f3f4f6;
-  padding:40px;
-}
+  /* Make it embed/iframe-friendly */
+  html, body{
+    width:100%;
+    height:100%;
+    background:transparent;
+    overflow:hidden;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
 
-/* ===== Metrics Bar ===== */
-.metrics-bar{
-  width:100%;
-  max-width:1000px;
+  /* Full-width strip that fits any container */
+  .metrics-bar{
+    width:100%;
+    max-width:none;
 
-  background:#f8f9fb;                 /* Salesforce light gray */
-  border:1px solid #e5e7eb;
-  border-radius:8px;
+    /* Remove “card” look so it blends into embed page */
+    background:transparent;
+    border:none;
+    border-radius:0;
 
-  display:flex;
-  align-items:center;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-  overflow:hidden;
-}
+    /* Compact spacing like your screenshot */
+    padding:10px 12px;
 
-/* ===== Each metric block ===== */
-.metric{
-  flex:1;
-  padding:14px 22px;
+    gap:18px; /* spacing between metrics (instead of gridlines) */
+  }
 
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+  .metric{
+    flex:1;
+    min-width:0; /* prevents overflow in tight embeds */
+    padding:6px 0;
+  }
 
-  border-right:1px solid #e5e7eb;
-}
+  .label{
+    font-size:11px;
+    font-weight:500;
+    color:#6b7280;
+    margin-bottom:6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
 
-.metric:last-child{
-  border-right:none;
-}
+  .value{
+    font-size:14px;
+    font-weight:700;
+    color:#111827;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
 
-/* ===== Label ===== */
-.label{
-  font-size:12px;
-  font-weight:600;
-  color:#6b7280;
-  margin-bottom:6px;
-}
-
-/* ===== Value ===== */
-.value{
-  font-size:18px;
-  font-weight:700;
-  color:#111827;
-}
-
-/* ===== Slight Salesforce spacing feel ===== */
-.metric:hover{
-  background:#f3f4f6;
-}
+  /* Optional: tighter look on very small embeds */
+  @media (max-width:560px){
+    .metrics-bar{ gap:12px; padding:8px 10px; }
+    .value{ font-size:13px; }
+  }
 </style>
 </head>
 
-
 <body>
+  <div class="metrics-bar">
+    <div class="metric">
+      <div class="label">Deal Age</div>
+      <div class="value">121 days</div>
+    </div>
 
-<div class="metrics-bar">
+    <div class="metric">
+      <div class="label">Current Stage</div>
+      <div class="value">10 days</div>
+    </div>
 
-  <div class="metric">
-    <div class="label">Deal Age</div>
-    <div class="value">121 days</div>
+    <div class="metric">
+      <div class="label">Since Last Activity</div>
+      <div class="value">5 days</div>
+    </div>
+
+    <div class="metric">
+      <div class="label">Open Activities</div>
+      <div class="value">3</div>
+    </div>
+
+    <div class="metric">
+      <div class="label">Activities Overdue</div>
+      <div class="value">1</div>
+    </div>
   </div>
-
-  <div class="metric">
-    <div class="label">Current Stage</div>
-    <div class="value">10 days</div>
-  </div>
-
-  <div class="metric">
-    <div class="label">Since Last Activity</div>
-    <div class="value">5 days</div>
-  </div>
-
-  <div class="metric">
-    <div class="label">Open Activities</div>
-    <div class="value">3</div>
-  </div>
-
-  <div class="metric">
-    <div class="label">Activities Overdue</div>
-    <div class="value">1</div>
-  </div>
-
-</div>
-
 </body>
 </html>
