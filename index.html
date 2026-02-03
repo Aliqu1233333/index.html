@@ -2,106 +2,152 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Metrics Banner</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+  *{ margin:0; padding:0; box-sizing:border-box; }
 
-html, body{
-  width:100%;
-  height:100%;
-  background:transparent;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  overflow:hidden;
-}
+  html, body{
+    width:100%;
+    height:100%;
+    background:transparent;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    overflow:hidden;
+  }
 
-/* Fill the whole Monday embed vertically */
-.wrapper{
-  height:100vh;              /* KEY FIX */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:1.2vh;
-}
+  /* The embed frame (whatever Monday gives us) */
+  .stage{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:10px;              /* slight breathing room inside the embed card */
+    background:transparent;
+  }
 
-/* Banner */
-.banner{
-  width:100%;
-  height:100%;               /* fill embed */
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:10px;
+  /*
+    We design at a fixed size so scaling is predictable.
+    Then JS scales .design to fit .stage exactly.
+  */
+  .design{
+    width: 1200px;             /* BASE DESIGN WIDTH */
+    height: 140px;             /* BASE DESIGN HEIGHT (banner row height) */
+    transform-origin:center center;
+  }
 
-  display:grid;
-  grid-template-columns: repeat(5, 1fr);
-}
+  .banner{
+    width:100%;
+    height:100%;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    overflow:hidden;
 
-/* Each metric */
-.metric{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:2.5vh 2.5vw;
-  border-right:1px solid #eef0f2;
-}
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
 
-.metric:last-child{
-  border-right:none;
-}
+  .metric{
+    padding: 18px 22px;
+    border-right:1px solid #eef0f2;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:8px;
+  }
+  .metric:last-child{ border-right:none; }
 
-/* Fonts scale with height automatically */
-.label{
-  font-size:1.8vh;           /* responsive */
-  font-weight:600;
-  color:#6b7280;
-  margin-bottom:1vh;
-}
+  .label{
+    font-size: 13px;
+    font-weight: 600;
+    color:#6b7280;
+    line-height:1.1;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
 
-.value{
-  font-size:5.5vh;           /* responsive + fills space nicely */
-  font-weight:800;
-  color:#111827;
-}
+  .value{
+    font-size: 28px;
+    font-weight: 800;
+    color:#111827;
+    line-height:1.1;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
 </style>
 </head>
 
 <body>
+  <div class="stage" id="stage">
+    <div class="design" id="design">
+      <div class="banner" role="region" aria-label="Opportunity Metrics">
+        <div class="metric">
+          <div class="label">Deal Age</div>
+          <div class="value">121 days</div>
+        </div>
 
-<div class="wrapper">
-  <div class="banner">
+        <div class="metric">
+          <div class="label">Current Stage</div>
+          <div class="value">10 days</div>
+        </div>
 
-    <div class="metric">
-      <div class="label">Deal Age</div>
-      <div class="value">121 days</div>
+        <div class="metric">
+          <div class="label">Since Last Activity</div>
+          <div class="value">5 days</div>
+        </div>
+
+        <div class="metric">
+          <div class="label">Open Activities</div>
+          <div class="value">3</div>
+        </div>
+
+        <div class="metric">
+          <div class="label">Activities Overdue</div>
+          <div class="value">1</div>
+        </div>
+      </div>
     </div>
-
-    <div class="metric">
-      <div class="label">Current Stage</div>
-      <div class="value">10 days</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Since Last Activity</div>
-      <div class="value">5 days</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Open Activities</div>
-      <div class="value">3</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Activities Overdue</div>
-      <div class="value">1</div>
-    </div>
-
   </div>
-</div>
 
+<script>
+  (function () {
+    const stage = document.getElementById('stage');
+    const design = document.getElementById('design');
+
+    // How aggressively to fill the embed:
+    // 0.95 = small margin, 1.0 = as large as possible without clipping
+    const FILL = 0.98;
+
+    function fit() {
+      const sw = stage.clientWidth;
+      const sh = stage.clientHeight;
+
+      // Base design size (must match CSS .design width/height)
+      const dw = 1200;
+      const dh = 140;
+
+      if (!sw || !sh) return;
+
+      // Scale to fit inside the embed (contain)
+      const scale = Math.min(sw / dw, sh / dh) * FILL;
+
+      design.style.transform = `scale(${scale})`;
+    }
+
+    // Fit on load
+    fit();
+
+    // Fit whenever Monday resizes the embed
+    const ro = new ResizeObserver(fit);
+    ro.observe(stage);
+
+    // Extra safety for fonts/layout changes
+    window.addEventListener('load', fit);
+  })();
+</script>
 </body>
 </html>
