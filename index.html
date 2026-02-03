@@ -1,59 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Opportunity Stats Strip</title>
-  <style>
-    :root{
-      --bg: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --border: #e5e7eb;
-      --shadow: 0 1px 2px rgba(16,24,40,.06);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    * { box-sizing: border-box; }
-    body{
-      margin:0;
-      padding:24px;
-      background:#f3f4f6;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-    }
+<title>Important Metrics</title>
 
-    /* Container like a Salesforce-ish card edge */
-    .strip {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      width: 920px;
-      max-width: 100%;
-    }
+<style>
+/* ===== Reset ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .strip-inner{
-      display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
-      gap: 0;
-    }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#f3f4f6;
+  padding:40px;
+}
 
-    .metric{
-      padding: 14px 18px;
-      border-right: 1px solid var(--border);
-      background: #fff;
-      min-height: 62px;
+/* ===== Metrics Bar ===== */
+.metrics-bar{
+  width:100%;
+  max-width:1000px;
 
-      display:flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .metric:last-child{ border-right: none; }
+  background:#f8f9fb;                 /* Salesforce light gray */
+  border:1px solid #e5e7eb;
+  border-radius:8px;
 
-    .label{
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: .1px;
-     
+  display:flex;
+  align-items:center;
+
+  overflow:hidden;
+}
+
+/* ===== Each metric block ===== */
+.metric{
+  flex:1;
+  padding:14px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  border-right:1px solid #e5e7eb;
+}
+
+.metric:last-child{
+  border-right:none;
+}
+
+/* ===== Label ===== */
+.label{
+  font-size:12px;
+  font-weight:600;
+  color:#6b7280;
+  margin-bottom:6px;
+}
+
+/* ===== Value ===== */
+.value{
+  font-size:18px;
+  font-weight:700;
+  color:#111827;
+}
+
+/* ===== Slight Salesforce spacing feel ===== */
+.metric:hover{
+  background:#f3f4f6;
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="metrics-bar">
+
+  <div class="metric">
+    <div class="label">Deal Age</div>
+    <div class="value">121 days</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Current Stage</div>
+    <div class="value">10 days</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Since Last Activity</div>
+    <div class="value">5 days</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Open Activities</div>
+    <div class="value">3</div>
+  </div>
+
+  <div class="metric">
+    <div class="label">Activities Overdue</div>
+    <div class="value">1</div>
+  </div>
+
+</div>
+
+</body>
+</html>
