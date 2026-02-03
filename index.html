@@ -9,70 +9,68 @@
 <style>
   *{ margin:0; padding:0; box-sizing:border-box; }
 
-  /* Make it embed/iframe-friendly */
   html, body{
     width:100%;
     height:100%;
     background:transparent;
-    overflow:hidden;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
 
-  /* Full-width strip that fits any container */
-  .metrics-bar{
-    width:100%;
-    max-width:none;
-
-    /* Remove “card” look so it blends into embed page */
-    background:transparent;
-    border:none;
-    border-radius:0;
-
+  /* This makes it sit nicely inside a tall embed */
+  body{
+    padding:12px;
     display:flex;
+    align-items:flex-start;
+    justify-content:flex-start;
+  }
+
+  /* The “strip” container (subtle, clean) */
+  .metrics-strip{
+    display:inline-flex;             /* key: prevents stretching across the whole embed */
     align-items:center;
-    justify-content:space-between;
+    gap:34px;                        /* spacing between metrics (no gridlines) */
 
-    /* Compact spacing like your screenshot */
-    padding:10px 12px;
+    background:#f8f9fb;              /* light Salesforce-ish */
+    border:1px solid #e5e7eb;
+    border-radius:8px;
 
-    gap:18px; /* spacing between metrics (instead of gridlines) */
+    padding:12px 14px;
+    max-width:100%;
   }
 
   .metric{
-    flex:1;
-    min-width:0; /* prevents overflow in tight embeds */
-    padding:6px 0;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    min-width:110px;                /* keeps consistent spacing */
   }
 
   .label{
     font-size:11px;
-    font-weight:500;
+    font-weight:600;
     color:#6b7280;
-    margin-bottom:6px;
+    line-height:1.1;
     white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
   }
 
   .value{
     font-size:14px;
     font-weight:700;
     color:#111827;
+    line-height:1.1;
     white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
   }
 
-  /* Optional: tighter look on very small embeds */
-  @media (max-width:560px){
-    .metrics-bar{ gap:12px; padding:8px 10px; }
-    .value{ font-size:13px; }
+  /* On smaller embeds, tighten spacing so it still fits */
+  @media (max-width: 720px){
+    .metrics-strip{ gap:18px; }
+    .metric{ min-width: 90px; }
   }
 </style>
 </head>
 
 <body>
-  <div class="metrics-bar">
+  <div class="metrics-strip">
     <div class="metric">
       <div class="label">Deal Age</div>
       <div class="value">121 days</div>
