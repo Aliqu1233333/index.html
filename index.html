@@ -7,8 +7,9 @@
 
 <style>
   :root{
-    /* Salesforce-ish neutrals */
-    --bg: transparent;
+    /* tweak this if you want it even bigger (1.0 = normal, 1.15/1.25 = larger) */
+    --scale: 1.25;
+
     --card-bg: #ffffff;
     --card-border: #e5e7eb;
     --divider: #eef0f2;
@@ -22,51 +23,52 @@
   html, body{
     width:100%;
     height:100%;
-    background: var(--bg);
+    background: transparent;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    overflow:hidden; /* avoids iframe scrollbars */
+    overflow:hidden; /* prevent iframe scrollbars */
   }
 
-  /* IMPORTANT:
-     Many embeds give you a tall container.
-     This centers the banner vertically so it "fills" the space like Salesforce. */
-  .frame{
-    width:100%;
-    height:100%;
+  /* Monday gives a tall embed area; center the banner in it */
+  body{
     display:flex;
-    align-items:center;      /* vertical centering */
-    justify-content:stretch; /* full width */
-    padding: 10px 12px;      /* matches the margin Salesforce leaves around the row */
+    align-items:center;   /* vertical center */
+    justify-content:center;
+    padding: 12px;
   }
 
-  /* This is the actual Salesforce-like banner card */
+  /* Scale wrapper: makes EVERYTHING bigger without changing layout logic */
+  .scale{
+    width:100%;
+    transform: scale(var(--scale));
+    transform-origin: center center;
+  }
+
   .banner{
     width:100%;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow:hidden;
   }
 
-  /* Use a grid so each metric gets identical sizing */
   .grid{
     display:grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .metric{
-    padding: 14px 18px; /* key: makes it “taller” like the Salesforce row */
-    min-height: 64px;   /* key: ensures it feels like a banner, not tiny text */
+    padding: 18px 22px;     /* bigger padding */
+    min-height: 84px;       /* taller row (this is a big part of the “Salesforce feel”) */
     display:flex;
     flex-direction:column;
     justify-content:center;
-    gap: 6px;
-    border-right: 1px solid var(--divider); /* Salesforce separators */
+    gap: 8px;
+    border-right: 1px solid var(--divider);
   }
   .metric:last-child{ border-right:none; }
 
   .label{
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--label);
     line-height: 1.1;
@@ -76,8 +78,8 @@
   }
 
   .value{
-    font-size: 16px;  /* Salesforce values look bigger than your embed */
-    font-weight: 700;
+    font-size: 18px;       /* bigger value text */
+    font-weight: 750;      /* slightly heavier */
     color: var(--value);
     line-height: 1.1;
     white-space: nowrap;
@@ -85,8 +87,8 @@
     text-overflow: ellipsis;
   }
 
-  /* If the embed is narrow, keep it clean and readable */
-  @media (max-width: 700px){
+  /* If the embed becomes narrow, keep it readable */
+  @media (max-width: 780px){
     .grid{ grid-template-columns: 1fr 1fr; }
     .metric{
       border-right:none;
@@ -98,7 +100,7 @@
 </head>
 
 <body>
-  <div class="frame">
+  <div class="scale">
     <div class="banner" role="region" aria-label="Opportunity Metrics">
       <div class="grid">
         <div class="metric">
