@@ -9,7 +9,7 @@
 :root{
   --bg:#ffffff;
 
-  --sf-blue:#16325C;     /* 👈 Salesforce dark blue numbers */
+  --sf-blue:#16325C;
   --muted:#8b95a7;
 }
 
@@ -37,60 +37,60 @@ html, body{
     sans-serif;
 }
 
-/* PERFECT CENTERING (no top-heavy padding anymore) */
+/* Slightly bigger vertical presence */
 .wrapper{
   height:100%;
-  padding:18px 24px;     /* 👈 reduced from 32px */
+  padding:22px 26px;   /* ⬆ slightly more breathing room */
   display:flex;
-  align-items:center;    /* true vertical center */
+  align-items:center;
 }
 
-/* Banner */
+/* Card */
 .banner{
   width:100%;
   background:var(--bg);
 
-  border-radius:12px;
+  border-radius:14px;
 
-  /* softer + lighter shadow */
+  /* softer premium shadow */
   box-shadow:
-    0 1px 2px rgba(0,0,0,0.04),
-    0 6px 14px rgba(0,0,0,0.03);
+    0 2px 4px rgba(0,0,0,0.05),
+    0 10px 24px rgba(0,0,0,0.04);
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  padding:18px 26px;     /* slightly tighter */
+  padding:26px 34px;   /* ⬆ bigger card padding */
 }
 
-/* Metric block */
+/* Metric blocks */
 .metric{
   display:flex;
   flex-direction:column;
-  gap:6px;
-  min-width:120px;
+  gap:8px;
+  min-width:130px;
 }
 
-/* Labels */
+/* Labels (slightly bigger) */
 .label{
-  font-size:14px;
+  font-size:15px;      /* was 14 */
   font-weight:500;
   color:var(--muted);
 }
 
-/* Values */
+/* Values (slightly bigger + softer) */
 .value{
-  font-size:28px;
-  font-weight:600;       /* softer weight */
-  color:var(--sf-blue);  /* 👈 Salesforce blue */
+  font-size:32px;      /* was 28 */
+  font-weight:600;
+  color:var(--sf-blue);
 }
 
-/* Wrap gracefully on smaller embeds */
+/* Wrap nicely if embed gets narrow */
 @media (max-width:900px){
   .banner{
     flex-wrap:wrap;
-    gap:16px;
+    gap:20px;
   }
 }
 </style>
