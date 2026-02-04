@@ -24,7 +24,7 @@
 
 html, body{
   height:100%;
-  overflow:hidden;      /* 👈 removes right scrollbar */
+  overflow:hidden;
   font-family:
     Inter,
     ui-sans-serif,
@@ -37,40 +37,36 @@ html, body{
     sans-serif;
 }
 
-/* Outer subtle tint */
+/* TRUE CENTERING — no vertical padding */
 .wrapper{
   height:100%;
-  padding:20px 24px;
-
   display:flex;
-  align-items:center;
+  align-items:center;     /* perfect vertical center */
+  justify-content:center;
 
   background:var(--panel);
-  border-radius:14px;
-
-  overflow:hidden;
 }
 
-/* Inner white card */
+/* Card */
 .banner{
-  width:100%;
+  width:96%;             /* slight side breathing room */
   background:var(--card);
   border-radius:14px;
 
+  padding:26px 28px;
+
   display:flex;
   align-items:center;
-
-  padding:26px 18px; /* slightly taller */
 
   box-shadow:
     0 -2px 6px rgba(0,0,0,.03),
     0 10px 22px rgba(0,0,0,.05);
 }
 
-/* Metric blocks */
+/* Metrics */
 .metric{
   flex:1;
-  padding:10px 28px;
+  padding:10px 26px;
 
   display:flex;
   flex-direction:column;
@@ -81,7 +77,7 @@ html, body{
   position:relative;
 }
 
-/* Soft dividers */
+/* separators */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
@@ -92,24 +88,17 @@ html, body{
   background:var(--divider);
 }
 
-/* Labels */
+/* text */
 .label{
-  font-size:15px;      /* slightly bigger */
+  font-size:15px;
   font-weight:500;
   color:var(--muted);
 }
 
-/* Values */
 .value{
-  font-size:36px;      /* slightly bigger */
+  font-size:33px;
   font-weight:600;
   color:var(--sf-blue);
-  letter-spacing:.2px;
-}
-
-/* subtle polish */
-.metric:hover{
-  transform:translateY(-1px);
 }
 </style>
 </head>
