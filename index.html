@@ -7,29 +7,22 @@
 
 <style>
 :root{
-  /* DO NOT CHANGE (per your request) */
+  /* your locked values */
   --sf-blue:#16325C;
   --muted:#8b95a7;
 
-  /* allowed styling tokens */
   --card:#ffffff;
   --divider:#eef1f5;
-
-  /* subtle Lightning depth */
-  --stroke: rgba(15, 23, 42, 0.08);
-  --shadow: 0 10px 24px rgba(0,0,0,0.06);
-  --highlight: rgba(255,255,255,0.9);
-
-  /* very subtle accent (not text color) */
-  --accent: rgba(22, 50, 92, 0.12);
+  --stroke: rgba(15,23,42,.08);
 }
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 
 html, body{
   height:100%;
-  overflow:hidden;          /* no scrollbars */
-  background:transparent;   /* let Monday's own background show */
+  overflow:hidden;
+  background:transparent;
+
   font-family:
     Inter,
     ui-sans-serif,
@@ -42,79 +35,67 @@ html, body{
     sans-serif;
 }
 
-/* keep it wide + optically centered */
+/* stage */
 .stage{
   height:100%;
-  width:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
-
-  /* slight above-center bias */
-  padding: 8px 0 16px 0;
+  padding:8px 0 16px 0;
 }
 
-/* main KPI card (this replaces the bubble entirely) */
+/* clean Lightning-style card (no bubble) */
 .banner{
-  width: calc(100% - 28px);
-  background: var(--card);
-  border-radius: 14px;
-
-  /* subtle Lightning-ish card treatment */
-  box-shadow:
-    0 1px 0 var(--highlight),
-    0 0 0 1px var(--stroke),
-    var(--shadow);
-
-  overflow:hidden;
-  position:relative;
+  width:calc(100% - 28px);
+  background:#fff;
+  border-radius:14px;
 
   display:flex;
   align-items:center;
-  padding: 22px 18px;
+
+  padding:22px 18px;
+
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9),
+    0 0 0 1px var(--stroke),
+    0 10px 22px rgba(0,0,0,.06);
 }
 
-/* tiny top accent line (Salesforce-y, but not loud) */
-.banner::before{
-  content:"";
-  position:absolute;
-  left:14px;
-  right:14px;
-  top:10px;
-  height:2px;
-  border-radius:999px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  pointer-events:none;
-}
-
-/* Metrics */
+/* metric blocks */
 .metric{
   flex:1;
-  padding: 10px 22px;
+  padding:10px 22px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
-  gap:7px;
+  gap:6px;
 
   position:relative;
-  transition: transform 160ms ease;
 }
 
-/* soft separators */
+/* dividers */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
   right:0;
-  top:26%;
-  bottom:26%;
+  top:28%;
+  bottom:28%;
   width:1px;
-  background: var(--divider);
+  background:var(--divider);
 }
 
-/* typography (unchanged colors and family) */
+/* icons (new) */
+.icon{
+  width:14px;
+  height:14px;
+  opacity:.55;
+  margin-bottom:2px;
+  fill:var(--sf-blue);
+}
+
+/* typography (unchanged color/type) */
 .label{
   font-size:15px;
   font-weight:500;
@@ -127,38 +108,57 @@ html, body{
   color:var(--sf-blue);
 }
 
-/* subtle hover polish (optional, feels premium) */
+/* subtle polish */
 .metric:hover{
-  transform: translateY(-1px);
+  transform:translateY(-1px);
+  transition:160ms ease;
 }
 </style>
 </head>
 
 <body>
-  <div class="stage">
-    <div class="banner">
 
-      <div class="metric">
-        <div class="label">Lead Score</div>
-        <div class="value">76</div>
-      </div>
+<div class="stage">
+  <div class="banner">
 
-      <div class="metric">
-        <div class="label">Current Stage</div>
-        <div class="value">10 days</div>
-      </div>
-
-      <div class="metric">
-        <div class="label">Since Last Activity</div>
-        <div class="value">5 days</div>
-      </div>
-
-      <div class="metric">
-        <div class="label">Deal Age</div>
-        <div class="value">121 days</div>
-      </div>
-
+    <!-- Lead Score -->
+    <div class="metric">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 3a7 7 0 110 14 7 7 0 010-14zm0 3a4 4 0 100 8 4 4 0 000-8z"/>
+      </svg>
+      <div class="label">Lead Score</div>
+      <div class="value">76</div>
     </div>
+
+    <!-- Current Stage -->
+    <div class="metric">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M4 3h2v18H4V3zm4 2l12 5-12 5V5z"/>
+      </svg>
+      <div class="label">Current Stage</div>
+      <div class="value">10 days</div>
+    </div>
+
+    <!-- Since Last Activity -->
+    <div class="metric">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v6l5 3 1-1-4-2V7z"/>
+      </svg>
+      <div class="label">Since Last Activity</div>
+      <div class="value">5 days</div>
+    </div>
+
+    <!-- Deal Age -->
+    <div class="metric">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm12 6H5v12h14V8z"/>
+      </svg>
+      <div class="label">Deal Age</div>
+      <div class="value">121 days</div>
+    </div>
+
   </div>
+</div>
+
 </body>
 </html>
