@@ -15,16 +15,11 @@
   --divider:#eef1f5;
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
 
-/* 🚨 kill ALL scrollbars */
 html, body{
   height:100%;
-  overflow:hidden;
+  overflow:hidden;          /* remove scrollbar */
   background:transparent;
   font-family:
     Inter,
@@ -38,34 +33,35 @@ html, body{
     sans-serif;
 }
 
-/* perfect stage */
+/* Full-width stage */
 .stage{
   height:100%;
+  width:100%;
+  overflow:hidden;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
+
+  /* optical “slightly above center” without changing size */
+  padding: 10px 0 18px 0;   /* 👈 bottom a bit larger than top */
 }
 
-/* bubble container */
+/* Bubble ring (kept thin so it doesn’t make the module taller) */
 .panel{
-  width:min(1400px, 100%);
+  width: calc(100% - 32px); /* 👈 makes it wide like before */
   background:var(--panel);
   border-radius:14px;
-  padding:12px;
+  padding:10px;             /* 👈 thinner ring */
   overflow:hidden;
-
-  /* 👇 raise visually ~3x more than before */
-  margin-top:-18px;   /* instead of transform */
 }
 
-/* card */
+/* Card */
 .banner{
   width:100%;
   background:var(--card);
   border-radius:14px;
-
-  padding:26px 28px;
+  padding:24px 26px;        /* slightly less tall than before */
 
   display:flex;
   align-items:center;
@@ -75,10 +71,10 @@ html, body{
     0 10px 22px rgba(0,0,0,.05);
 }
 
-/* metrics */
+/* Metrics */
 .metric{
   flex:1;
-  padding:10px 26px;
+  padding:10px 22px;
 
   display:flex;
   flex-direction:column;
@@ -89,13 +85,12 @@ html, body{
   position:relative;
 }
 
-/* soft dividers */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
   right:0;
-  top:20%;
-  bottom:20%;
+  top:22%;
+  bottom:22%;
   width:1px;
   background:var(--divider);
 }
@@ -115,34 +110,32 @@ html, body{
 </head>
 
 <body>
+  <div class="stage">
+    <div class="panel">
+      <div class="banner">
 
-<div class="stage">
-  <div class="panel">
-    <div class="banner">
+        <div class="metric">
+          <div class="label">Deal Score</div>
+          <div class="value">76</div>
+        </div>
 
-      <div class="metric">
-        <div class="label">Deal Score</div>
-        <div class="value">76</div>
+        <div class="metric">
+          <div class="label">Current Stage</div>
+          <div class="value">10 days</div>
+        </div>
+
+        <div class="metric">
+          <div class="label">Since Last Activity</div>
+          <div class="value">5 days</div>
+        </div>
+
+        <div class="metric">
+          <div class="label">Deal Age</div>
+          <div class="value">121 days</div>
+        </div>
+
       </div>
-
-      <div class="metric">
-        <div class="label">Current Stage</div>
-        <div class="value">10 days</div>
-      </div>
-
-      <div class="metric">
-        <div class="label">Since Last Activity</div>
-        <div class="value">5 days</div>
-      </div>
-
-      <div class="metric">
-        <div class="label">Deal Age</div>
-        <div class="value">121 days</div>
-      </div>
-
     </div>
   </div>
-</div>
-
 </body>
 </html>
