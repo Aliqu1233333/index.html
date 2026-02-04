@@ -15,12 +15,17 @@
   --divider:#eef1f5;
 }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
+/* 🚨 kill ALL scrollbars */
 html, body{
   height:100%;
   overflow:hidden;
-  background:transparent; /* IMPORTANT: don't tint the whole iframe */
+  background:transparent;
   font-family:
     Inter,
     ui-sans-serif,
@@ -33,25 +38,28 @@ html, body{
     sans-serif;
 }
 
-/* Center ONLY the content card */
+/* perfect stage */
 .stage{
   height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-
-  padding: 0 16px; /* side breathing room only */
+  overflow:hidden;
 }
 
-/* This is the “bubble” now (contained, not the whole iframe) */
+/* bubble container */
 .panel{
   width:min(1400px, 100%);
   background:var(--panel);
   border-radius:14px;
-  padding:14px;                 /* the tint ring around the card */
+  padding:12px;
+  overflow:hidden;
+
+  /* 👇 raise visually ~3x more than before */
+  margin-top:-18px;   /* instead of transform */
 }
 
-/* Inner card */
+/* card */
 .banner{
   width:100%;
   background:var(--card);
@@ -65,11 +73,9 @@ html, body{
   box-shadow:
     0 -2px 6px rgba(0,0,0,.03),
     0 10px 22px rgba(0,0,0,.05);
-
-  /* tiny optical raise (since it's high on the page) */
-  transform: translateY(-6px);
 }
 
+/* metrics */
 .metric{
   flex:1;
   padding:10px 26px;
@@ -83,6 +89,7 @@ html, body{
   position:relative;
 }
 
+/* soft dividers */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
@@ -100,7 +107,7 @@ html, body{
 }
 
 .value{
-  font-size:33px;        /* you said you lowered by ~3pts — this matches */
+  font-size:33px;
   font-weight:600;
   color:var(--sf-blue);
 }
@@ -108,32 +115,34 @@ html, body{
 </head>
 
 <body>
-  <div class="stage">
-    <div class="panel">
-      <div class="banner">
 
-        <div class="metric">
-          <div class="label">Deal Score</div>
-          <div class="value">76</div>
-        </div>
+<div class="stage">
+  <div class="panel">
+    <div class="banner">
 
-        <div class="metric">
-          <div class="label">Current Stage</div>
-          <div class="value">10 days</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Since Last Activity</div>
-          <div class="value">5 days</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Deal Age</div>
-          <div class="value">121 days</div>
-        </div>
-
+      <div class="metric">
+        <div class="label">Deal Score</div>
+        <div class="value">76</div>
       </div>
+
+      <div class="metric">
+        <div class="label">Current Stage</div>
+        <div class="value">10 days</div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Since Last Activity</div>
+        <div class="value">5 days</div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Deal Age</div>
+        <div class="value">121 days</div>
+      </div>
+
     </div>
   </div>
+</div>
+
 </body>
 </html>
