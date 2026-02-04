@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Activity Analytics</title>
+<title>Metrics Banner</title>
 
 <style>
 :root{
@@ -15,12 +15,16 @@
   --divider:#eef1f5;
 }
 
-*{ margin:0; padding:0; box-sizing:border-box; }
+/* Reset */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
 html, body{
   height:100%;
-  overflow:hidden;          /* remove scrollbar */
-  background:transparent;
+  overflow:hidden;      /* 👈 removes right scrollbar */
   font-family:
     Inter,
     ui-sans-serif,
@@ -33,48 +37,40 @@ html, body{
     sans-serif;
 }
 
-/* Full-width stage */
-.stage{
+/* Outer subtle tint */
+.wrapper{
   height:100%;
-  width:100%;
-  overflow:hidden;
+  padding:20px 24px;
 
   display:flex;
   align-items:center;
-  justify-content:center;
 
-  /* optical “slightly above center” without changing size */
-  padding: 10px 0 18px 0;   /* 👈 bottom a bit larger than top */
-}
-
-/* Bubble ring (kept thin so it doesn’t make the module taller) */
-.panel{
-  width: calc(100% - 32px); /* 👈 makes it wide like before */
   background:var(--panel);
   border-radius:14px;
-  padding:10px;             /* 👈 thinner ring */
+
   overflow:hidden;
 }
 
-/* Card */
+/* Inner white card */
 .banner{
   width:100%;
   background:var(--card);
   border-radius:14px;
-  padding:24px 26px;        /* slightly less tall than before */
 
   display:flex;
   align-items:center;
+
+  padding:26px 18px; /* slightly taller */
 
   box-shadow:
     0 -2px 6px rgba(0,0,0,.03),
     0 10px 22px rgba(0,0,0,.05);
 }
 
-/* Metrics */
+/* Metric blocks */
 .metric{
   flex:1;
-  padding:10px 22px;
+  padding:10px 28px;
 
   display:flex;
   flex-direction:column;
@@ -85,57 +81,66 @@ html, body{
   position:relative;
 }
 
+/* Soft dividers */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
   right:0;
-  top:22%;
-  bottom:22%;
+  top:20%;
+  bottom:20%;
   width:1px;
   background:var(--divider);
 }
 
+/* Labels */
 .label{
-  font-size:15px;
+  font-size:15px;      /* slightly bigger */
   font-weight:500;
   color:var(--muted);
 }
 
+/* Values */
 .value{
-  font-size:33px;
+  font-size:36px;      /* slightly bigger */
   font-weight:600;
   color:var(--sf-blue);
+  letter-spacing:.2px;
+}
+
+/* subtle polish */
+.metric:hover{
+  transform:translateY(-1px);
 }
 </style>
 </head>
 
 <body>
-  <div class="stage">
-    <div class="panel">
-      <div class="banner">
 
-        <div class="metric">
-          <div class="label">Deal Score</div>
-          <div class="value">76</div>
-        </div>
+<div class="wrapper">
+  <div class="banner">
 
-        <div class="metric">
-          <div class="label">Current Stage</div>
-          <div class="value">10 days</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Since Last Activity</div>
-          <div class="value">5 days</div>
-        </div>
-
-        <div class="metric">
-          <div class="label">Deal Age</div>
-          <div class="value">121 days</div>
-        </div>
-
-      </div>
+    <div class="metric">
+      <div class="label">Deal Age</div>
+      <div class="value">121 days</div>
     </div>
+
+    <div class="metric">
+      <div class="label">Current Stage</div>
+      <div class="value">10 days</div>
+    </div>
+
+    <div class="metric">
+      <div class="label">Since Last Activity</div>
+      <div class="value">5 days</div>
+    </div>
+
+    <div class="metric">
+      <div class="label">Lead Score</div>
+      <div class="value">76</div>
+    </div>
+
   </div>
+</div>
+
 </body>
 </html>
