@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Metrics Banner</title>
+<title>Activity Analytics</title>
 
 <style>
 :root{
@@ -15,16 +15,12 @@
   --divider:#eef1f5;
 }
 
-/* Reset */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
 
 html, body{
   height:100%;
   overflow:hidden;
+  background:transparent; /* IMPORTANT: don't tint the whole iframe */
   font-family:
     Inter,
     ui-sans-serif,
@@ -37,19 +33,27 @@ html, body{
     sans-serif;
 }
 
-/* TRUE CENTERING — no vertical padding */
-.wrapper{
+/* Center ONLY the content card */
+.stage{
   height:100%;
   display:flex;
-  align-items:center;     /* perfect vertical center */
+  align-items:center;
   justify-content:center;
 
-  background:var(--panel);
+  padding: 0 16px; /* side breathing room only */
 }
 
-/* Card */
+/* This is the “bubble” now (contained, not the whole iframe) */
+.panel{
+  width:min(1400px, 100%);
+  background:var(--panel);
+  border-radius:14px;
+  padding:14px;                 /* the tint ring around the card */
+}
+
+/* Inner card */
 .banner{
-  width:96%;             /* slight side breathing room */
+  width:100%;
   background:var(--card);
   border-radius:14px;
 
@@ -61,9 +65,11 @@ html, body{
   box-shadow:
     0 -2px 6px rgba(0,0,0,.03),
     0 10px 22px rgba(0,0,0,.05);
+
+  /* tiny optical raise (since it's high on the page) */
+  transform: translateY(-6px);
 }
 
-/* Metrics */
 .metric{
   flex:1;
   padding:10px 26px;
@@ -77,7 +83,6 @@ html, body{
   position:relative;
 }
 
-/* separators */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
@@ -88,7 +93,6 @@ html, body{
   background:var(--divider);
 }
 
-/* text */
 .label{
   font-size:15px;
   font-weight:500;
@@ -96,7 +100,7 @@ html, body{
 }
 
 .value{
-  font-size:33px;
+  font-size:33px;        /* you said you lowered by ~3pts — this matches */
   font-weight:600;
   color:var(--sf-blue);
 }
@@ -104,32 +108,32 @@ html, body{
 </head>
 
 <body>
+  <div class="stage">
+    <div class="panel">
+      <div class="banner">
 
-<div class="wrapper">
-  <div class="banner">
+        <div class="metric">
+          <div class="label">Deal Score</div>
+          <div class="value">76</div>
+        </div>
 
-    <div class="metric">
-      <div class="label">Deal Score</div>
-      <div class="value">76</div>
+        <div class="metric">
+          <div class="label">Current Stage</div>
+          <div class="value">10 days</div>
+        </div>
+
+        <div class="metric">
+          <div class="label">Since Last Activity</div>
+          <div class="value">5 days</div>
+        </div>
+
+        <div class="metric">
+          <div class="label">Deal Age</div>
+          <div class="value">121 days</div>
+        </div>
+
+      </div>
     </div>
-
-    <div class="metric">
-      <div class="label">Current Stage</div>
-      <div class="value">10 days</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Since Last Activity</div>
-      <div class="value">5 days</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Deal Age</div>
-      <div class="value">121 days</div>
-    </div>
-
   </div>
-</div>
-
 </body>
 </html>
