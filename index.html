@@ -8,7 +8,6 @@
 <style>
 :root{
   --bg:#ffffff;
-
   --sf-blue:#16325C;
   --muted:#8b95a7;
 }
@@ -37,31 +36,30 @@ html, body{
     sans-serif;
 }
 
-/* Slightly bigger vertical presence */
+/* Slight upward bias so it feels centered visually */
 .wrapper{
   height:100%;
-  padding:22px 26px;   /* ⬆ slightly more breathing room */
+  padding:14px 26px 26px 26px; /* 👈 smaller top, larger bottom */
   display:flex;
-  align-items:center;
+  align-items:flex-start;       /* 👈 raises card slightly */
 }
 
 /* Card */
 .banner{
   width:100%;
   background:var(--bg);
-
   border-radius:14px;
 
-  /* softer premium shadow */
+  /* Balanced top + bottom shadows */
   box-shadow:
-    0 2px 4px rgba(0,0,0,0.05),
-    0 10px 24px rgba(0,0,0,0.04);
+    0 -2px 6px rgba(0,0,0,0.03),   /* 👈 top shadow */
+    0 10px 24px rgba(0,0,0,0.05);  /* bottom shadow */
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
-  padding:26px 34px;   /* ⬆ bigger card padding */
+  padding:26px 34px;
 }
 
 /* Metric blocks */
@@ -72,21 +70,27 @@ html, body{
   min-width:130px;
 }
 
-/* Labels (slightly bigger) */
+/* Center last two metrics */
+.metric:nth-last-child(-n+2){
+  align-items:center;
+  text-align:center;
+}
+
+/* Labels */
 .label{
-  font-size:15px;      /* was 14 */
+  font-size:15px;
   font-weight:500;
   color:var(--muted);
 }
 
-/* Values (slightly bigger + softer) */
+/* Values */
 .value{
-  font-size:32px;      /* was 28 */
+  font-size:32px;
   font-weight:600;
   color:var(--sf-blue);
 }
 
-/* Wrap nicely if embed gets narrow */
+/* Wrap nicely on smaller embeds */
 @media (max-width:900px){
   .banner{
     flex-wrap:wrap;
