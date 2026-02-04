@@ -3,26 +3,33 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Metrics Banner</title>
+<title>Activity Analytics</title>
 
 <style>
 :root{
+  /* DO NOT CHANGE (per your request) */
   --sf-blue:#16325C;
   --muted:#8b95a7;
 
-  --panel:#f6f8fb;        /* subtle container tint */
+  /* allowed styling tokens */
   --card:#ffffff;
   --divider:#eef1f5;
+
+  /* subtle Lightning depth */
+  --stroke: rgba(15, 23, 42, 0.08);
+  --shadow: 0 10px 24px rgba(0,0,0,0.06);
+  --highlight: rgba(255,255,255,0.9);
+
+  /* very subtle accent (not text color) */
+  --accent: rgba(22, 50, 92, 0.12);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{ margin:0; padding:0; box-sizing:border-box; }
 
 html, body{
   height:100%;
+  overflow:hidden;          /* no scrollbars */
+  background:transparent;   /* let Monday's own background show */
   font-family:
     Inter,
     ui-sans-serif,
@@ -33,79 +40,94 @@ html, body{
     Helvetica,
     Arial,
     sans-serif;
-
-  background:transparent;
 }
 
-/* outer subtle tint */
-.wrapper{
+/* keep it wide + optically centered */
+.stage{
   height:100%;
-  padding:18px 22px;
-
-  display:flex;
-  align-items:center;
-
-  background:var(--panel);
-  border-radius:14px;
-}
-
-/* inner white card */
-.banner{
   width:100%;
-  background:var(--card);
-  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+
+  /* slight above-center bias */
+  padding: 8px 0 16px 0;
+}
+
+/* main KPI card (this replaces the bubble entirely) */
+.banner{
+  width: calc(100% - 28px);
+  background: var(--card);
+  border-radius: 14px;
+
+  /* subtle Lightning-ish card treatment */
+  box-shadow:
+    0 1px 0 var(--highlight),
+    0 0 0 1px var(--stroke),
+    var(--shadow);
+
+  overflow:hidden;
+  position:relative;
 
   display:flex;
   align-items:center;
-
-  box-shadow:
-    0 1px 2px rgba(0,0,0,.04),
-    0 6px 18px rgba(0,0,0,.05);
-
-  padding:22px 10px;
+  padding: 22px 18px;
 }
 
-/* metric blocks */
+/* tiny top accent line (Salesforce-y, but not loud) */
+.banner::before{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:10px;
+  height:2px;
+  border-radius:999px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  pointer-events:none;
+}
+
+/* Metrics */
 .metric{
   flex:1;
-  padding:8px 24px;
+  padding: 10px 22px;
 
   display:flex;
   flex-direction:column;
   align-items:center;
   text-align:center;
-  gap:6px;
+  gap:7px;
 
   position:relative;
+  transition: transform 160ms ease;
 }
 
-/* subtle separators */
+/* soft separators */
 .metric:not(:last-child)::after{
   content:"";
   position:absolute;
   right:0;
-  top:18%;
-  bottom:18%;
+  top:26%;
+  bottom:26%;
   width:1px;
-  background:var(--divider);
+  background: var(--divider);
 }
 
-/* labels */
+/* typography (unchanged colors and family) */
 .label{
-  font-size:14px;
+  font-size:15px;
   font-weight:500;
   color:var(--muted);
 }
 
-/* numbers */
 .value{
-  font-size:34px;      /* slightly bigger */
+  font-size:33px;
   font-weight:600;
   color:var(--sf-blue);
-  letter-spacing:.2px;
 }
 
-/* subtle polish */
+/* subtle hover polish (optional, feels premium) */
 .metric:hover{
   transform: translateY(-1px);
 }
@@ -113,37 +135,30 @@ html, body{
 </head>
 
 <body>
+  <div class="stage">
+    <div class="banner">
 
-<div class="wrapper">
-  <div class="banner">
+      <div class="metric">
+        <div class="label">Lead Score</div>
+        <div class="value">76</div>
+      </div>
 
-    <div class="metric">
-      <div class="label">Deal Age</div>
-      <div class="value">121 days</div>
+      <div class="metric">
+        <div class="label">Current Stage</div>
+        <div class="value">10 days</div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Since Last Activity</div>
+        <div class="value">5 days</div>
+      </div>
+
+      <div class="metric">
+        <div class="label">Deal Age</div>
+        <div class="value">121 days</div>
+      </div>
+
     </div>
-
-    <div class="metric">
-      <div class="label">Current Stage</div>
-      <div class="value">10 days</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Since Last Activity</div>
-      <div class="value">5 days</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Lead Score</div>
-      <div class="value">76</div>
-    </div>
-
-    <div class="metric">
-      <div class="label">Close Probability</div>
-      <div class="value">15%</div>
-    </div>
-
   </div>
-</div>
-
 </body>
 </html>
